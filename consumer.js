@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 8080;
 const KAFKA_BROKER = process.env.KAFKA_BROKER;
 const KAFKA_USERNAME = process.env.KAFKA_USERNAME;
 const KAFKA_PASSWORD = process.env.KAFKA_PASSWORD;
-const TOPIC_NAME = process.env.TOPIC_NAME || 'sensor-data';
-const PEM_FILE_PATH = process.env.PEM_FILE_PATH || 'ca.pem';
+const TOPIC_NAME = process.env.TOPIC_NAME || 'sigma-band-data';
+const CA_PEM = process.env.CA_PEM || 'ca.pem';
 const GROUP_ID = process.env.KAFKA_GROUP_ID || 'flutter-group';
 
 // Initialize Express app
@@ -62,7 +62,7 @@ const kafka = new Kafka({
     clientId: 'kafka-proxy',
     brokers: [KAFKA_BROKER],
     ssl: {
-        ca: [fs.readFileSync(PEM_FILE_PATH, "utf-8")],
+        ca: [CA_PEM],
     },
     sasl: {
         mechanism: 'plain',
